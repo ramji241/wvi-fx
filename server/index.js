@@ -2,8 +2,8 @@ const path = require('path')
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
-const session = require('express-session')
-const MongoDBStore = require('connect-mongodb-session')(session)
+// const session = require('express-session')
+// const MongoDBStore = require('connect-mongodb-session')(session)
 const connectDB = require('./config/database')
 const port = process.env.port || 3001
 
