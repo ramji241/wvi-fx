@@ -10,11 +10,11 @@ const port = process.env.port || 3001
 require('dotenv').config({path: '/etc/secrets/.env'})
 connectDB()
 
-app.use(express.static(path.resolve(__dirname, '../client/public')))
+app.use(express.static(path.resolve(__dirname, '../client/build')))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 app.get('/api', (req, res) => res.json({message: 'Hello from server!'}))
-app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '../client/public', 'index.html')))
+app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '../client/build', 'index.html')))
 
 app.listen(port, () => console.log(`Server listening on ${port}...`))
