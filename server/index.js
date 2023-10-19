@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 const connectDB = require('./config/database')
 const port = process.env.port || 3001
 
-require('dotenv').config({path: './config/.env'})
+require('dotenv').config({path: '/etc/secrets/.env'})
 connectDB()
 
 app.use(express.static(path.resolve(__dirname, '../client/public')))
