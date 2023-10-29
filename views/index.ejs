@@ -12,94 +12,10 @@
 <body>
     <header></header>
     <main>
-        <table>
-            <thead>
-                <tr id="trDate">
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody id="tbodyEvents"></tbody>
-        </table>
-        <div id="btnsCashFlowTable">
-            <button type="button" id="btnAddEvent">Add/Edit Event</button>
-        </div>
-        <aside id="asideCashFlowDetails" class="hidden">
-            <form action="" id="formCashFlowDetail">
-                <div id="divCashFlowType">
-                    <section id="sectionCashFlowType">
-                        <label for="typeCashFlowDetail">Event type *</label>
-                        <input type="text" name="" id="typeCashFlowDetail" list="optionsType" required>
-                    </section>
-                    <section id="sectionCertaintyEvent">
-                        <label for="rangeCertaintyEvent">Certainty Ratio:</label>
-                        <div class="rangeWrap">
-                            <input type="range" name="" id="rangeCertaintyType" min="0" max="1" value="1" step="0.25" list="listCertaintyType" required>
-                            <datalist id="listCertaintyType">
-                                <option value="0" label="0%"></option>
-                                <option value="0.25" label="25%"></option>
-                                <option value="0.5" label="50%"></option>
-                                <option value="0.75" label="75%"></option>
-                                <option value="1" label="100%"></option>
-                            </datalist>
-                        </div>
-                    </section>
-                </div>
-                <div id="divCashFlowAmount">
-                    <section id="sectionCashFlowAmount">
-                        <label for="amountCashFlowDetail">Amount *</label>
-                        <input type="number" name="" id="amountCashFlowDetail" step="0.01" required>
-                    </section>
-                    <section id="sectionCertaintyAmount">
-                        <label for="rangeCertaintyAmount">Certainty Ratio:</label>
-                        <div class="rangeWrap">
-                            <input type="range" name="" id="rangeCertaintyAmount" min="0" max="1" value="1" step="0.25" list="listCertaintyAmount" required>
-                            <datalist id="listCertaintyAmount">
-                                <option value="0" label="0%"></option>
-                                <option value="0.25" label="25%"></option>
-                                <option value="0.5" label="50%"></option>
-                                <option value="0.75" label="75%"></option>
-                                <option value="1" label="100%"></option>
-                            </datalist>
-                        </div>
-                    </section>
-                </div>
-                <div id="divCashFlowDate">
-                    <section id="sectionCashFlowDate">
-                        <label for="dateCashFlowDetail">Date *</label>
-                        <input type="date" id="dateCashFlowDetail" required>
-                    </section>
-                    <section id="sectionCertaintyDate">
-                        <label for="rangeCertaintyDate">Certainty Ratio:</label>
-                        <div class="rangeWrap">
-                            <input type="range" name="" id="rangeCertaintyDate" min="0" max="1" value="1" step="0.25" list="listCertaintyDate" required>
-                            <datalist id="listCertaintyDate">
-                                <option value="0" label="0%"></option>
-                                <option value="0.25" label="25%"></option>
-                                <option value="0.5" label="50%"></option>
-                                <option value="0.75" label="75%"></option>
-                                <option value="1" label="100%"></option>
-                            </datalist>
-                        </div>
-                    </section>
-                </div>
-                <div>
-                    <section id="sectionCashFlowTypeId">
-                        <label for="typeIdCashFlowDetail">Type Id</label>
-                        <input type="text" name="" id="typeIdCashFlowDetail" defaultValue="None">
-                    </section>
-                </div>
-                <div id="btnsCashFlowDetail">
-                    <button type="button" id="btnSaveCashFlowDetail">Save Draft</button>
-                    <button type="button" id="btnSubmitCashFlowDetail">Submit</button>
-                </div>
-                <p id="footerForm">* required</p>
-            </form>
-            <datalist id="optionsType">
-                <option value="Income from sponsorship"></option>
-                <option value="Income from grant/contract"></option>
-                <option value="Income from other sources"></option>
-            </datalist>
-        </aside>
+        <h1>Welcome to Global Treasury's FX page!</h1>
+        <ul>
+            <li><a href="/cashflow/">Cash flow page</a></li>
+        </ul>
     </main>
     <script type="text/javascript" src="client.js"></script>
 </body>

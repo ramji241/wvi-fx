@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WVI Global Treasury FX Model</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header></header>
+    <main>
+        <section id="sectionSelectors">
+            <select name="" id="account">
+                <option value="temp" selected>temp</option>
+            </select>
+            <select name="" id="currency">
+                <option value="USD" selected>USD</option>
+            </select>
+            <input type="date" name="" id="asOfDate">
+            <button type="button" id="btnAddEvent">Add New</button>
+        </section>
+        <section id="sectionForecast">
+            <table id="tableForecast">
+                <thead>
+                    <tr id="trDate">
+                        <th id="labelCategory" class="">Category</th>
+                        <td id="labelGroup" class="">Group</td>
+                        <% const cols = [...new Set(events.map(e => e.date.toISOString().substring(0,10)))] %>
+                        <% cols.forEach(e => { %>
+                        <td class="tdDate">
+                            <div>
+                                <input type="date" class="inputDate" value="<%= e %>">
+                            </div>
+                        </td>
+                        <% }) %>
+                    </tr>
+                </thead>
+                <tbody id="tbodyEvents">
+                    <% const rows = [] %>
+                    <% const tempLength = cols.length + 2 %>
+                    <% do { %>
+                        <% const tempArray = new Array(tempLength).fill() %>
+                        <% tempArray[0] = events[0].category %>
+                        <% tempArray[1] = events[0].group %>
+                        <% for (let i = events.length - 1; i >= 0; i--) { %>
+                            <% if (events[i].category === tempArray[0] && events[i].group === tempArray[1]) { %>
+                                <% const dateIndex = cols.findIndex(date => date === events[i].date.toISOString().substring(0,10)) %>
+                                <% tempArray[dateIndex + 2] = events[i] %>
+                                <% events.splice(i, 1) %>
+                            <% } %>
+                        <% } %>
+                        <% rows.push(tempArray) %>
+                    <% } while (events.length > 0) %>
+                    <% rows.forEach(arr => { %>
+                    <tr class="trEvent">
+                    <% arr.forEach((event, index) => { %>
+                        <% if (index === 0) { %>
+                            <th class="thCategory">
+                                <div>
+                                    <input type="text" name="" id="" class="inputCategory" list="optionsCategory" value="<%= event %>">
+                                </div>
+                            </th>
+                        <% } else if (index === 1) { %>
+                            <td class="tdGroup">
+                                <div>
+                                    <input type="text" name="" id="" class="inputGroup" value="<%= event %>">
+                                </div>
+                            </td>
+                        <% } else if (event) { %>
+                            <td class="tdAmount">
+                                <div>
+                                    <input type="number" name="" id="<%= event._id %>" class="inputAmount" step="0.01" value="<%= event.amount %>">
+                                    <aside class="asideCertainty">
+                                        <div class="divEventCertainty">
+                                            <span class="labelEventCertainty">Event:</span>
+                                            <meter min="0" max="1" optimum="0.9" class="certaintyMeter" value="<%= event.eventCertainty %>"></meter>
+                                        </div>
+                                        <div class="divAmountCertainty">
+                                            <span class="labelAmountCertainty">Amount:</span>
+                                            <meter min="0" max="1" optimum="0.9" class="certaintyMeter" value="<%= event.amountCertainty %>"></meter>
+                                        </div>
+                                        <div class="divDateCertainty">
+                                            <span class="labelDateCertainty">Date:</span>
+                                            <meter min="0" max="1" optimum="0.9" class="certaintyMeter" value="<%= event.dateCertainty %>"></meter>
+                                        </div>
+                                    </aside>
+                                </div>
+                            </td>
+                        <% } else { %>
+                            <td class="tdAmount" >
+                                <div>
+                                    <input type="number" name="" id="" class="inputAmount" step="0.01" value="">
+                                    <aside class="asideCertainty">
+                                        <div class="divEventCertainty">
+                                            <span class="labelEventCertainty">Event:</span>
+                                            <meter min="0" max="1" optimum="0.9" value=""></meter>
+                                        </div>
+                                        <div class="divAmountCertainty">
+                                            <span class="labelAmountCertainty">Amount:</span>
+                                            <meter min="0" max="1" optimum="0.9" value=""></meter>
+                                        </div>
+                                        <div class="divDateCertainty">
+                                            <span class="labelDateCertainty">Date:</span>
+                                            <meter min="0" max="1" optimum="0.9" value=""></meter>
+                                        </div>
+                                    </aside>
+                                </div>
+                            </td>
+                        <% } %>
+                    <% }) %>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>    
+        </section>
+        <aside id="asideEvent" class="hidden">
+            <form action="" id="formEventDetails" data-id="">
+                <div id="divDirection">
+                    <section id="sectionDirection">
+                        <input type="radio" name="direction" id="inputInflow" value="inflow" required>
+                        <label for="inputInflow">Inflow</label>
+                        <input type="radio" name="direction" id="inputOutflow" value="outflow">
+                        <label for="inputOutflow">Outflow</label>
+                    </section>
+                </div>
+                <div id="divEventCategory">
+                    <section id="sectionEventCategory">
+                        <label for="inputEventCategory">Event category *</label>
+                        <input type="text" name="category" id="inputEventCategory" list="optionsCategory" required>
+                    </section>
+                    <section id="sectionEventCertainty">
+                        <label for="rangeEventCertainty">Certainty Ratio:</label>
+                        <div class="rangeWrap">
+                            <input type="range" name="eventCertainty" id="rangeEventCertainty" min="0" max="1" value="1" step="0.1" list="listCertainty" required>
+                        </div>
+                    </section>
+                </div>
+                <div id="divEventAmount">
+                    <section id="sectionEventAmount">
+                        <label for="inputEventAmount">Amount *</label>
+                        <input type="number" name="amount" id="inputEventAmount" step="0.01" required>
+                    </section>
+                    <section id="sectionAmountCertainty">
+                        <label for="rangeAmountCertainty">Certainty Ratio:</label>
+                        <div class="rangeWrap">
+                            <input type="range" name="amountCertainty" id="rangeAmountCertainty" min="0" max="1" value="1" step="0.1" list="listCertainty" required>
+                        </div>
+                    </section>
+                </div>
+                <div id="divEventDate">
+                    <section id="sectionEventDate">
+                        <label for="inputEventDate">Date *</label>
+                        <input type="date" name="date" id="inputEventDate" required>
+                    </section>
+                    <section id="sectionDateCertainty">
+                        <label for="rangeDateCertainty">Certainty Ratio:</label>
+                        <div class="rangeWrap">
+                            <input type="range" name="dateCertainty" id="rangeDateCertainty" min="0" max="1" value="1" step="0.1" list="listCertainty" required>
+                        </div>
+                    </section>
+                </div>
+                <div id="divEventGroup">
+                    <label for="inputEventGroup">Event group</label>
+                    <div>
+                        <input type="text" name="group" id="inputEventGroup" disabled>
+                        <input type="checkbox" name="requireGroup" id="inputRequireGroup" value="true">
+                        <label for="inputRequireGroup">Require?</label>
+                    </div>
+                </div>
+                <div id="divEventDescriptor">
+                    <label for="inputEventDescriptor">Event descriptor</label>
+                    <input type="text" name="eventDescriptor" id="inputEventDescriptor" defaultValue="None">
+                </div>
+                <div id="btnsEventDetails">
+                    <button type="button" id="btnSaveEvent">Save</button>
+                    <button type="button" id="btnSubmitEvent">Submit</button>
+                    <button type="reset" id="btnCancel">Cancel</button>
+                </div>
+                <p id="footerForm">* required</p>
+            </form>
+            <datalist id="optionsCategory">
+                <option value="Sponsorship"></option>
+                <option value="Grant" selected></option>
+                <option value="Contract"></option>
+                <option value="Loan"></option>
+            </datalist>
+            <datalist id="listCertainty"></datalist>
+        </aside>
+    </main>
+    <script type="text/javascript" src="../client.js"></script>
+</body>
+</html>

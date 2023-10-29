@@ -43,7 +43,7 @@ q:before, q:after {
 	content: none;
 }
 table {
-	border-collapse: collapse;
+	border-collapse: separate;
 	border-spacing: 0;
 }
 
@@ -66,23 +66,109 @@ html {
 
 main {
 	display: flex;
+	flex-wrap: wrap;
 }
 
-#tempTemplate {
+#sectionSelectors {
 	width: 100%;
-	min-height: 100px;
+	margin: 1%;
+	padding: 1%;
+	border: 0.15rem #46bb95 solid;
+	border-radius: 0.5rem;
 }
 
-#tempInputAmount {
-	border: 1px solid black;
-	min-width: 500px;
-	height: 100px;
-}
-
-#asideCashFlowDetails {
-	flex-basis: 40%;
-	min-width: 40%;
+#asideEvent {
+	flex-basis: 30%;
 	align-self: flex-end;
+	margin: 1%;
+	padding: 1%;
+	border: 0.15rem #46bb95 solid;
+	border-radius: 0.5rem;
+}
+
+#sectionForecast {
+	flex: 1;
+	margin: 1%;
+	padding: 1%;
+	border: 0.15rem #46bb95 solid;
+	border-radius: 0.5rem;
+	width: 600px;
+	overflow: scroll;
+}
+
+/* Table */
+
+table {
+	border-spacing: .25rem;
+	border-collapse: collapse;
+}
+
+.tdDate > div {
+	display: flex;
+	flex: 1;
+}
+
+.inputDate {
+	flex: 1;
+}
+
+.tdDate,
+.thCategory,
+.tdGroup,
+.tdAmount {
+	border: 1px solid rgba(202, 196, 187, 1);
+	padding: 0.1rem;
+}
+
+#labelCategory,
+#labelGroup {
+	text-align: start;
+	font-size: 0.9rem;
+	font-weight: bold;
+}
+
+.inputDate,
+.inputCategory,
+.inputGroup,
+.inputAmount {
+	border: none;
+	font-size: 0.9rem;
+}
+
+.inputDate:hover,
+.inputCategory:hover,
+.inputAmount:hover {
+	background-color: rgba(255, 107, 0, 0.25);
+}
+
+.inputDate:focus,
+.inputCategory:focus,
+.inputAmount:focus {
+	outline: none;
+}
+
+.tdAmount > div {
+	display: flex;
+	gap: 0.25rem;
+}
+
+.asideCertainty {
+	width: 50%;
+}
+
+.inputAmount {
+	flex-basis: 100%;
+	min-width: 0;
+}
+
+.asideCertainty * {
+	width: 100%;
+	font-size: 0.5rem;
+}
+
+.asideCertainty > div {
+	display: flex;
+	max-width: 100%;
 }
 
 /* Buttons */
@@ -90,70 +176,112 @@ main {
 button {
 	font-weight: 0;
 	color: #fff;
-	background-color: #ff6b00;
-	padding: 10px 30px;
-	border: solid 2px #ff6b00;
-	box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
-	border-radius: 50px;
+	background-color: #CB0770;
+	padding: 0.2rem 0.5rem;
+	border: solid 0.1rem #CB0770;
+	box-shadow: rgb(0, 0, 0) 0;
+	border-radius: 0.5rem;
 	transition : 600ms ease-in-out;
 	transform: translateY(0);
 	cursor: pointer;
-	width: 8.5rem;
+	width: 5.5rem;
 	justify-content: center;
 }
 
 button:hover{
 	transition : 600ms ease-in-out;
-	padding: 10px 30px;
+	padding: 0.2rem 0.5rem;
 	transform : translateY(-0px);
-	background-color: #fff;
-	color: #ff6b00;
-	border: solid 2px #ff6b00;
+	background-color: #ff6b00;
+	color: #fff;
+	border: solid 0.1rem #ff6b00;
 }
 
 /* Cash flow details */
 
-#formCashFlowDetail {
-	margin: 1rem;
-	border: 0.2rem solid #cac4bb;
-	border-radius: 0.5rem;
-	padding: 1rem;
-}
-
-#formCashFlowDetail > div {
+#formEventDetails > div:not(#divDirection) {
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 1rem;
 }
 
-#formCashFlowDetail section {
+#formEventDetails section:not(#sectionDirection) {
 	display: flex;
 	flex-direction: column;
 	width: 47%;
 }
 
-#formCashFlowDetail div > section:first-of-type {
+#formEventDetails div > section:first-of-type {
 	margin-right: 1rem;
 }
 
-#formCashFlowDetail input {
+#formEventDetails input {
 	width: 100%;
 }
 
-#formCashFlowDetail label {
+#formEventDetails label {
 	flex-basis: 50%;
 	font-weight: bold;
 	margin-bottom: 0.5rem;
 }
 
-#sectionCertaintyEvent > div,
-#sectionCertaintyAmount > div,
-#sectionCertaintyDate > div {
+#divDirection {
+	border: 0.15rem #46bb95 solid;
+	border-radius: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+#sectionDirection {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.5rem;
+}
+
+#sectionDirection > input,
+#sectionDirection > label {
+	padding: 0;
+	margin: 0
+}
+
+#sectionEventCertainty > div,
+#sectionAmountCertainty > div,
+#sectionDateCertainty > div {
 	display: flex;
 	font-size: 0.75rem;
 }
 
-input[type='range'] {
+#divEventGroup,
+#divEventDescriptor {
+	display: flex;
+	flex-direction: column;
+}
+
+#divEventGroup > div {
+	display: flex;
+	align-items: center;
+}
+
+#divEventGroup > div > input[type='checkbox'] {
+	max-width: 1.5rem;
+}
+
+#divEventGroup > div > label {
+	max-width: max-content;
+}
+
+#divEventGroup > div > input[type='checkbox'],
+#divEventGroup > div > label {
+	font-size: 0.75rem;
+	margin: 0;
+	justify-self: flex-end;
+}
+
+#divEventGroup > div > input[type='text'] {
+	width: 100%;
+}
+
+.rangeWrap > input[type='range'] {
 	/* remove default appearance */
 	-webkit-appearance: none;
 	appearance: none;
@@ -167,20 +295,38 @@ input[type='range'] {
 	background: rgba(202,196,187,1);
 	background: linear-gradient(to right, 
 		rgba(202,196,187,1) 0%, 
-		rgba(202,196,187,1) 24%, 
-		rgba(51,51,51,1) 25%, 
-		rgba(202,196,187,1) 26%, 
+		rgba(202,196,187,1) 9%, 
+		rgba(51,51,51,1) 10%, 
+		rgba(202,196,187,1) 11%, 
+		rgba(202,196,187,1) 19%, 
+		rgba(51,51,51,1) 20%, 
+		rgba(202,196,187,1) 21%, 
+		rgba(202,196,187,1) 29%, 
+		rgba(51,51,51,1) 30%, 
+		rgba(202,196,187,1) 31%, 
+		rgba(202,196,187,1) 39%, 
+		rgba(51,51,51,1) 40%, 
+		rgba(202,196,187,1) 41%, 
 		rgba(202,196,187,1) 49%, 
 		rgba(51,51,51,1) 50%, 
 		rgba(202,196,187,1) 51%, 
-		rgba(202,196,187,1) 74%, 
-		rgba(51,51,51,1) 75%, 
-		rgba(202,196,187,1) 76%, 
+		rgba(202,196,187,1) 59%, 
+		rgba(51,51,51,1) 60%, 
+		rgba(202,196,187,1) 61%, 
+		rgba(202,196,187,1) 69%, 
+		rgba(51,51,51,1) 70%, 
+		rgba(202,196,187,1) 71%, 
+		rgba(202,196,187,1) 79%, 
+		rgba(51,51,51,1) 80%, 
+		rgba(202,196,187,1) 81%, 
+		rgba(202,196,187,1) 89%, 
+		rgba(51,51,51,1) 90%, 
+		rgba(202,196,187,1) 91%, 
 		rgba(202,196,187,1) 100%);
 	height: 6px;
 }
 
-input[type='range']::-webkit-slider-thumb {
+.rangeWrap > input[type='range']::-webkit-slider-thumb {
 	/* remove default appearance */
 	-webkit-appearance: none;
 	appearance: none;
@@ -194,19 +340,19 @@ input[type='range']::-webkit-slider-thumb {
 	transition: 0.2s ease-in-out;
 }
 
-input[type='range']::-webkit-slider-thumb:hover {
+.rangeWrap > input[type='range']::-webkit-slider-thumb:hover {
 	box-shadow: 0 0 0 0.5rem rgba(255,225,102,0.2);
 }
 
-input[type='range']:active::-webkit-slider-thumb {
+.rangeWrap > input[type='range']:active::-webkit-slider-thumb {
 	box-shadow: 0 0 0 0.5rem rgba(255,166,102,0.4);
 }
 
-input[type='range']:focus:-webkit-slider-thumb {
+.rangeWrap > input[type='range']:focus:-webkit-slider-thumb {
 	box-shadow: 0 0 0 0.5rem rgba(255,166,102,0.4);
 }
 
-input[type='range']::-moz-range-thumb {
+.rangeWrap > input[type='range']::-moz-range-thumb {
 	height: 1.25rem;
 	width: 0.75rem;
 	background: rgba(255,255,255,1);
@@ -214,21 +360,21 @@ input[type='range']::-moz-range-thumb {
 	transition: 0.2s ease-in-out
 }
 
-input[type='range']::-moz-range-thumb:hover {
+.rangeWrap > input[type='range']::-moz-range-thumb:hover {
 	box-shadow: 0 0 0 0.5rem rgba(255,85,0,0.1);
 }
 
-input[type='range']:active::-moz-range-thumb {
+.rangeWrap > input[type='range']:active::-moz-range-thumb {
 	box-shadow: 0 0 0 0.5rem rgba(255,85,0,0.2);
 }
 
-input[type='range']:focus:-moz-range-thumb {
+.rangeWrap > input[type='range']:focus:-moz-range-thumb {
 	box-shadow: 0 0 0 0.5rem rgba(255,85,0,0.2);
 }
 
-#formCashFlowDetail > #btnsCashFlowDetail {
+#formEventDetails > #btnsEventDetails {
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-evenly;
 	margin-bottom: 0;
 }
 
